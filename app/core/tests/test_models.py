@@ -72,7 +72,7 @@ class ModelTests(TestCase):
 
         self.assertEqual(str(tag),tag.name)
 
-    def test_create_ingreduent(self):
+    def test_create_ingredient(self):
         """TEst creating an ingresient is successful."""
         user = create_user()
         ingredient = models.Ingredient.objects.create(
