@@ -8,7 +8,7 @@ from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework import status
 
-CRREATE_USER_URL = reverse('user:create')
+CREATE_USER_URL = reverse('user:create')
 TOKEN_URL = reverse('user:token')
 ME_URL = reverse('user:me')
 
@@ -16,7 +16,7 @@ def create_user(**params):
     """Create and return a new user."""
     return get_user_model().objects.create_user(**params)
 
-class PunlicUserApiTests(TestCase):
+class PuplicUserApiTests(TestCase):
     """Test the public features of thr userAPI."""
 
     def setUp(self):
@@ -29,7 +29,7 @@ class PunlicUserApiTests(TestCase):
             'password': 'testpass123',
             'name': ' Test Name',
         }
-        res = self.client.post(CRREATE_USER_URL, payload)
+        res = self.client.post(CREATE_USER_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         user = get_user_model().objects.get(email=payload['email'])
@@ -44,7 +44,7 @@ class PunlicUserApiTests(TestCase):
             'name': ' Test Name',
         }
         create_user(**payload)
-        res = self.client.post(CRREATE_USER_URL, payload)
+        res = self.client.post(CREATE_USER_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
@@ -55,7 +55,7 @@ class PunlicUserApiTests(TestCase):
             'password': 'pw',
             'name': ' Test Name',
         }
-        res = self.client.post(CRREATE_USER_URL, payload)
+        res = self.client.post(CREATE_USER_URL, payload)
 
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
         user_exists = get_user_model().objects.filter(
@@ -105,7 +105,7 @@ class PunlicUserApiTests(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
-class PrivateUserApiTestst(TestCase):
+class PrivateUserApiTests(TestCase):
     """TestAPI requestst that require authntication."""
 
     def setUp(self):
