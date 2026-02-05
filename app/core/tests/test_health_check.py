@@ -1,12 +1,14 @@
 """
 Test for health check API.
 """
+
 from django.test import TestCase
+
 # from django.contrib.auth import get_user_model
 from django.urls import reverse
-
-from rest_framework.test import APIClient
 from rest_framework import status
+from rest_framework.test import APIClient
+
 
 class HealthCheckTest(TestCase):
     """Test the health check API."""
@@ -14,7 +16,7 @@ class HealthCheckTest(TestCase):
     def test_health_check(self):
         """Test the health check API."""
         client = APIClient()
-        url = reverse('health-check')
+        url = reverse("health-check")
         res = client.get(url)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
